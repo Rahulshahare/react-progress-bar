@@ -1,5 +1,4 @@
 'use strict';
-/* eslint-disable no-alert */
 
 var React = require('react');
 var ProgressBar = require('../src/ProgressBar.jsx');
