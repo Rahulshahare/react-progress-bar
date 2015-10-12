@@ -2,17 +2,12 @@
 
 var React = require('react/addons');
 var ReactBootstrap = require('react-bootstrap');
+var shallowRender = require('react-shallow-render');
 var TestUtils = React.addons.TestUtils;
 
 var assert = require('assert');
 
 var ProgressBar = require('../src/ProgressBar');
-
-var shallowRender = function(jsx) {
-  var shallowRenderer = TestUtils.createRenderer();
-  shallowRenderer.render(jsx);
-  return shallowRenderer.getRenderOutput();
-};
 
 var defaultProps = {
   now: 100,

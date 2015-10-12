@@ -1,6 +1,6 @@
 # react-progress-bar
 
-[React](https://facebook.github.io/react/) Component to render a [React Bootstrap](https://react-bootstrap.github.io/) progress bar in the HX Style (wrappered in a panel)
+[React](https://facebook.github.io/react/) Component to render a [React Bootstrap](https://react-bootstrap.github.io/) progress bar in the HX Style (wrapped in a panel)
 
 ```
 var ProgressBar = require('react-progress-bar');
