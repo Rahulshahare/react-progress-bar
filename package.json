@@ -2,8 +2,10 @@
   "name": "react-progress-bar",
   "version": "1.0.0",
   "description": "Component to generate a simple loading bar (wrapped in a panel)",
-  "main": "src/ProgressBar.jsx",
+  "main": "dist/ProgressBar.js",
   "scripts": {
+    "postinstall": "npm run build",
+    "build": "mkdir -p dist && babel src/Progressbar.jsx -o dist/ProgressBar.js",
     "prestart": "ulimit -n 9999",
     "start": "watchify -t babelify doc/example.js -o doc/example-built.js -v",
     "test": "mocha --compilers js:babel/register test/test*",
