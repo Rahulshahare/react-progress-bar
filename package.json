@@ -1,7 +1,7 @@
 {
   "name": "react-progress-bar",
   "version": "1.0.0",
-  "description": "Component to generate a simple HX style loading bar (wrapped in a panel)",
+  "description": "Component to generate a simple loading bar (wrapped in a panel)",
   "main": "src/ProgressBar.jsx",
   "scripts": {
     "prestart": "ulimit -n 9999",
@@ -24,6 +24,7 @@
     "babel": "^5.8.23",
     "babelify": "^6.3.0",
     "browserify": "^11.1.0",
+    "istanbul": "^0.3.22",
     "make-up": "^5.3.1",
     "mocha": "^2.3.3",
     "react-shallow-render": "^1.0.1",
