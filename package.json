@@ -7,7 +7,8 @@
     "prestart": "ulimit -n 9999",
     "start": "watchify -t babelify doc/example.js -o doc/example-built.js -v",
     "test": "mocha --compilers js:babel/register test/test*",
-    "lint": "make-up src test doc"
+    "lint": "make-up src test doc",
+    "coverage": "istanbul cover _mocha -- --compilers js:babel/register test/test* && istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100"
   },
   "author": "Rob Huzzey <robert.huzzey@holidayextras.com>",
   "license": "ISC",
