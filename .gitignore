@@ -1,0 +1,5 @@
+coverage
+.eslintrc
+doc/example-built.js
+node_modules
+npm-debug.log

@@ -1,6 +1,6 @@
 # react-progress-bar
 
-[React](https://facebook.github.io/react/) Component to render a [React Bootstrap](https://react-bootstrap.github.io/) progress bar in the HX Style (wrappered in a panel)
+[React](https://facebook.github.io/react/) Component to render a [React Bootstrap](https://react-bootstrap.github.io/) progress bar (wrapped in a panel)
 
 ```
 var ProgressBar = require('react-progress-bar');
@@ -24,5 +24,7 @@ Clone the repo and `npm install`.
 `npm start` will create and watchify an example which you can open in your browser, at `doc/example.html`
 
 `npm test` for the unit tests.
+
+`npm run coverage` gets coverage with istanbul, report is output to the `coverage` directory. It will exit nonzero if any metric is below 100%
 
 `npm run lint` checks the code against our [guidelines](https://github.com/holidayextras/culture/blob/master/.eslintrc)
