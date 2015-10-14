@@ -7,20 +7,23 @@ var ProgressBar = React.createClass({
 
   propTypes: {
     now: React.PropTypes.number,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger'])
   },
 
   getDefaultProps: function() {
     return {
       now: 100,
-      title: null
+      title: null,
+      type: 'info'
     };
   },
 
   render: function() {
     return (
-      <ReactBootstrap.Panel header={this.props.title} bsStyle="success">
-        <ReactBootstrap.ProgressBar active striped bsStyle="success" now={this.props.now} />
+      <ReactBootstrap.Panel header={this.props.title} bsStyle={this.props.type}>
+        <ReactBootstrap.ProgressBar active striped bsStyle={this.props.type} now={this.props.now} />
+        {this.props.children}
       </ReactBootstrap.Panel>
     );
   }
