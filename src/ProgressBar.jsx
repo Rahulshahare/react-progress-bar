@@ -8,7 +8,8 @@ var ProgressBar = React.createClass({
   propTypes: {
     now: React.PropTypes.number,
     title: React.PropTypes.string,
-    type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger'])
+    type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger']),
+    children: React.PropTypes.node
   },
 
   getDefaultProps: function() {

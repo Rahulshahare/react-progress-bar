@@ -29,7 +29,7 @@ describe('ProgressBar', function() {
   });
 
   context('with no children passed in', function() {
-    
+
     var renderOutput;
     before(function() {
       renderOutput = shallowRender(<ProgressBar />);
@@ -52,7 +52,7 @@ describe('ProgressBar', function() {
         assert.equal(renderOutput.props.children[0].props.bsStyle, renderOutput.props.bsStyle);
       });
     });
-    
+
     context('2nd child (this.props.children property)', function() {
       it('should be undefined', function() {
         assert.equal(renderOutput.props.children[1], undefined);
@@ -62,7 +62,7 @@ describe('ProgressBar', function() {
   });
 
   context('with a child passed in', function() {
-    
+
     var renderOutput;
     before(function() {
       renderOutput = shallowRender(<ProgressBar><h1>Foobar</h1></ProgressBar>);
@@ -85,7 +85,7 @@ describe('ProgressBar', function() {
         assert.equal(renderOutput.props.children[0].props.bsStyle, renderOutput.props.bsStyle);
       });
     });
-    
+
     context('2nd child (this.props.children property)', function() {
       it('should be a h1', function() {
         assert.equal(renderOutput.props.children[1].type, 'h1');
