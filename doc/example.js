@@ -26,6 +26,15 @@ var Example = React.createClass({
         <h3>Defaults to 100% loaded</h3>
         <ProgressBar />
 
+        <h3>Defaults to 100% loaded over 10 seconds</h3>
+        <ProgressBar duration={10} />
+
+        <h3>Defaults to 100% loaded over 20 seconds</h3>
+        <ProgressBar duration={20} />
+
+        <h3>Defaults to 100% loaded over 30 seconds</h3>
+        <ProgressBar duration={30} />
+
         <h2>With an external control</h2>
         <h3>Updates based on a percent (as integer) you pass in</h3>
         <ProgressBar now={this.state.loadedTime} />
