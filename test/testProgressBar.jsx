@@ -10,9 +10,11 @@ var assert = require('assert');
 var ProgressBar = require('../src/ProgressBar');
 
 var defaultProps = {
-  now: 100,
+  now: 0,
   title: null,
-  type: 'info'
+  type: 'info',
+  loadTime: null,
+  interval: 500
 };
 
 // No need for too many tests here as we are using react bootstrap library
