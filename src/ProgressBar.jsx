@@ -58,9 +58,13 @@ var ProgressBar = React.createClass({
   },
 
   render: function() {
+
+    var subtitle = this.props.subtitle ? <p>{this.props.subtitle}</p> : '';
+
     return (
       <ReactBootstrap.Panel header={this.props.title} bsStyle={this.props.type}>
-        <ReactBootstrap.ProgressBar active striped bsStyle={this.props.type} now={this.state.now} ref="progressBar" />
+        {subtitle}
+        <ReactBootstrap.ProgressBar active striped bsStyle={this.props.type} now={this.state.now} />
         {this.props.children}
       </ReactBootstrap.Panel>
     );

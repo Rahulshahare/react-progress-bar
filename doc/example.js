@@ -42,6 +42,9 @@ var Example = React.createClass({
         <h2>Without external control of loading</h2>
         <h3>Defaults to 0% loaded</h3>
         <ProgressBar />
+
+        <h2>With some text</h2>
+        <ProgressBar subtitle="This is a subtitle" title="This is a title">This is a child</ProgressBar>
         
       </div>
     );
