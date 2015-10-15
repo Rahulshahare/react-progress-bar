@@ -7,7 +7,7 @@ var Example = React.createClass({
 
   getInitialState: function() {
     return {
-      loadedTime: 0
+      loadedTime: 20
     };
   },
 
@@ -22,14 +22,27 @@ var Example = React.createClass({
           <h1>Progress Bar</h1>
         </div>
 
-        <h2>Without external control of loading</h2>
-        <h3>Defaults to 100% loaded</h3>
-        <ProgressBar />
+        <h2>With a loadTime</h2>
+        <h3>Updates automatically over period of time passed in as prop</h3>
+        
+        <p>10 seconds</p>
+        <ProgressBar loadTime={10} />
+
+        <p>20 seconds</p>
+        <ProgressBar loadTime={20} />
+
+        <p>20 seconds (with lower interval making it smoother)</p>
+        <ProgressBar loadTime={20} interval={100} />
 
         <h2>With an external control</h2>
-        <h3>Updates based on a percent (as integer) you pass in</h3>
+        <h3>Updates based on a percent (as integer) you pass in (currently 20%)</h3>
         <ProgressBar now={this.state.loadedTime} />
         <button className="btn btn-default" onClick={this.updateTime}>Load 10% more</button>
+
+        <h2>Without external control of loading</h2>
+        <h3>Defaults to 0% loaded</h3>
+        <ProgressBar />
+        
       </div>
     );
   }
