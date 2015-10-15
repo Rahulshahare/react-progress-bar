@@ -52,11 +52,7 @@ var ProgressBar = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-
-    // TODO: Why do we get this update all the other components?
-    // debugger;
-
-    if(nextProps.now !== this.state.now) {
+    if(nextProps.now !== this.props.now) {
       this.setState({now: nextProps.now});
     }
   },
