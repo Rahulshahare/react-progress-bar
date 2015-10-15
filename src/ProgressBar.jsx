@@ -8,6 +8,7 @@ var ProgressBar = React.createClass({
   propTypes: {
     now: React.PropTypes.number,
     title: React.PropTypes.string,
+    subtitle: React.PropTypes.string,
     type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger']),
     children: React.PropTypes.node,
     loadTime: React.PropTypes.number,
@@ -24,6 +25,7 @@ var ProgressBar = React.createClass({
     return {
       now: 0,
       title: null,
+      subtitle: null,
       type: 'info',
       loadTime: null,
       interval: 500
@@ -59,7 +61,7 @@ var ProgressBar = React.createClass({
 
   render: function() {
 
-    var subtitle = this.props.subtitle ? <p>{this.props.subtitle}</p> : '';
+    var subtitle = this.props.subtitle ? <p>{this.props.subtitle}</p> : undefined;
 
     return (
       <ReactBootstrap.Panel header={this.props.title} bsStyle={this.props.type}>
