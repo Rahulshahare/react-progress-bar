@@ -1,5 +1,8 @@
 # Change log
 
+### 1.1.1
+- moved babel out of dev dependencies into dependencies to fix npm post install issue.
+
 ### 1.1.0
 - moved to using CSS transition duration to load the bar
 - changed to using duration & now props
