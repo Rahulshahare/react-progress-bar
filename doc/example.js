@@ -40,6 +40,16 @@ var Example = React.createClass({
         <p>5 second transition</p>
         <ProgressBar now={this.state.loadedTime} duration={5} />
         <button className="btn btn-default" onClick={this.updateTime}>Load 10% more</button>
+
+        <h2>With a title</h2>
+        <ProgressBar title="This is a title" />
+
+        <h2>With a subtitle</h2>
+        <ProgressBar subtitle="This is a subtitle" />
+
+        <h2>With a child</h2>
+        <ProgressBar><p>This is a child</p></ProgressBar>
+
       </div>
     );
   }
