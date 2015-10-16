@@ -26,10 +26,30 @@ var Example = React.createClass({
         <h3>Defaults to 100% loaded</h3>
         <ProgressBar />
 
+        <h3>Transitions to 50% loaded over 5 seconds</h3>
+        <ProgressBar duration={5} now={50} />
+
+        <h3>Transitions to 100% loaded over 30 seconds</h3>
+        <ProgressBar duration={30} />
+
         <h2>With an external control</h2>
         <h3>Updates based on a percent (as integer) you pass in</h3>
+        <p>default transition</p>
         <ProgressBar now={this.state.loadedTime} />
+
+        <p>5 second transition</p>
+        <ProgressBar now={this.state.loadedTime} duration={5} />
         <button className="btn btn-default" onClick={this.updateTime}>Load 10% more</button>
+
+        <h2>With a title</h2>
+        <ProgressBar title="This is a title" />
+
+        <h2>With a subtitle</h2>
+        <ProgressBar subtitle="This is a subtitle" />
+
+        <h2>With a child</h2>
+        <ProgressBar><p>This is a child</p></ProgressBar>
+
       </div>
     );
   }
