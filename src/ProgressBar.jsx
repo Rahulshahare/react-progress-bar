@@ -32,9 +32,13 @@ var ProgressBar = React.createClass({
 
   componentDidMount: function() {
     var self = this;
-    setTimeout(function() {
+    this._timeoutId = setTimeout(function() {
       self.setState({ loaded: self.props.now });
     }, 500);
+  },
+
+  componentWillUnmount: function() {
+    clearTimeout(this._timeoutId);
   },
 
   componentWillReceiveProps: function(nextProps) {

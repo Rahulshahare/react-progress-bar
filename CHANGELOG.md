@@ -1,5 +1,8 @@
 # Change log
 
+### 1.1.2
+- clear setTimeout when the component unmounts.
+
 ### 1.1.1
 - moved babel out of dev dependencies into dependencies to fix npm post install issue.
 

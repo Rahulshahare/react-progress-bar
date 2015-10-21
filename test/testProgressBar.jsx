@@ -143,6 +143,12 @@ describe('ProgressBar', function() {
       assert.equal(progressBars[0].props.now, 100);
     });
 
+    it('should call clearTimeout() when unmounted', function() {
+      var spy = sinon.spy(clock, 'clearTimeout');
+      React.unmountComponentAtNode(React.findDOMNode(element.refs.sot).parentNode);
+      assert(spy.calledOnce);
+    });
+
   });
 
 });
