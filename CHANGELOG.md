@@ -1,5 +1,8 @@
 # Change log
 
+### 1.1.3
+- checking the component is still mounted before changing state.
+
 ### 1.1.2
 - clear setTimeout when the component unmounts.
 
