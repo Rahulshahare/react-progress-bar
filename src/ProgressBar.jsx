@@ -33,7 +33,17 @@ var ProgressBar = React.createClass({
   componentDidMount: function() {
     var self = this;
     this._timeoutId = setTimeout(function() {
-      self.setState({ loaded: self.props.now });
+      try {
+        // We can only setState if we want our component to re-render
+        // and we only want to re-render if we have a DOM Node to render into.
+        if (self.isMounted()) {
+          self.setState({ loaded: self.props.now });
+        }
+      } catch(e) {
+        // Because our isMounted method throws if DOM has mutated, take advantage here
+        // and clear the timeout when we've hit this problem.
+        clearTimeout(self._timeoutId);
+      }
     }, 500);
   },
 

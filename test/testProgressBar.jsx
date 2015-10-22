@@ -97,10 +97,10 @@ describe('ProgressBar', function() {
 
   context('render into document', function() {
 
-    var testParent, element, clock, now;
-    before(function() {
+    var testParent, element, clock;
+    var now = 75;
+    beforeEach(function() {
       clock = sinon.useFakeTimers();
-      now = 75;
       testParent = React.createFactory(React.createClass({
         getInitialState: function() {
           return { testState: now };
@@ -113,7 +113,7 @@ describe('ProgressBar', function() {
       element = TestUtils.renderIntoDocument(testParent());
     });
 
-    after(function() {
+    afterEach(function() {
       clock.restore();
     });
 
@@ -131,6 +131,7 @@ describe('ProgressBar', function() {
       element.setState({
         testState: now
       });
+      clock.tick(500);
       var progressBars = TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar);
       assert.equal(progressBars[0].props.now, now);
     });
@@ -139,6 +140,7 @@ describe('ProgressBar', function() {
       element.setState({
         testState: 100
       });
+      clock.tick(500);
       var progressBars = TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar);
       assert.equal(progressBars[0].props.now, 100);
     });
@@ -147,6 +149,56 @@ describe('ProgressBar', function() {
       var spy = sinon.spy(clock, 'clearTimeout');
       React.unmountComponentAtNode(React.findDOMNode(element.refs.sot).parentNode);
       assert(spy.calledOnce);
+    });
+
+    context('componentDidMount', function() {
+
+      var isMounted;
+      beforeEach(function() {
+        isMounted = sinon.stub(ProgressBar.prototype, 'isMounted');
+      });
+
+      afterEach(function() {
+        isMounted.restore();
+      });
+
+      context('DOM Mutated', function() {
+
+        context('isMounted() throws', function() {
+          it('should call clearTimeout()', function() {
+            isMounted.throws();
+            var clearTimeOutSpy = sinon.spy(clock, 'clearTimeout');
+            clock.tick(500);
+            TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar);
+            assert(clearTimeOutSpy.calledOnce);
+            clearTimeOutSpy.restore();
+          });
+        });
+
+        context('isMounted() returns false', function() {
+          it('should only call setState() after timeout if DOM is mounted', function() {
+            isMounted.returns(false);
+            var setStateSpy = sinon.spy(ProgressBar.prototype, 'setState');
+            clock.tick(500);
+            TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar);
+            sinon.assert.notCalled(setStateSpy);
+            setStateSpy.restore();
+          });
+        });
+
+        context('isMounted() returns true', function() {
+          it('should call setState() if DOM doesnt mutate', function() {
+            isMounted.returns(true);
+            var setStateSpy = sinon.spy(ProgressBar.prototype, 'setState');
+            clock.tick(500);
+            TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar);
+            assert(setStateSpy.calledOnce);
+            setStateSpy.restore();
+          });
+        });
+
+      });
+
     });
 
   });
