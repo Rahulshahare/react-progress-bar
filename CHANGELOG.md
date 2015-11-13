@@ -1,21 +1,24 @@
 # Change log
 
+### 2.0.0
+- Updated react version.
+
 ### 1.1.3
-- checking the component is still mounted before changing state.
+- Checking the component is still mounted before changing state.
 
 ### 1.1.2
-- clear setTimeout when the component unmounts.
+- Clear setTimeout when the component unmounts.
 
 ### 1.1.1
-- moved babel out of dev dependencies into dependencies to fix npm post install issue.
+- Moved babel out of dev dependencies into dependencies to fix npm post install issue.
 
 ### 1.1.0
-- moved to using CSS transition duration to load the bar
-- changed to using duration & now props
+- Moved to using CSS transition duration to load the bar
+- Changed to using duration & now props
 
 ### 1.0.1
-- added in ability to pass children to the panel
+- Added in ability to pass children to the panel
 
 ### 1.0.0
-- initial release
+- Initial release
 
