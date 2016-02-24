@@ -1,10 +1,10 @@
 {
-  "name": "react-progress-bar",
-  "version": "2.0.0",
+  "name": "@holidayextras/react-progress-bar",
+  "version": "2.0.1",
   "description": "Component to generate a simple loading bar (wrapped in a panel)",
   "main": "dist/ProgressBar.js",
   "scripts": {
-    "postinstall": "npm run build",
+    "prepublish": "npm run build",
     "build": "mkdir -p dist && babel src/ProgressBar.jsx -o dist/ProgressBar.js",
     "prestart": "ulimit -n 9999",
     "start": "watchify -t babelify doc/example.js -o doc/example-built.js -v",
@@ -19,11 +19,12 @@
     "url": "https://github.com/holidayextras/react-progress-bar.git"
   },
   "dependencies": {
-    "babel": "^5.8.23",
     "react": "^0.14.2",
+    "react-dom": "^0.14.2",
     "react-bootstrap": "^0.28.2"
   },
   "devDependencies": {
+    "babel": "^5.8.23",
     "babelify": "^6.3.0",
     "browserify": "^11.1.0",
     "istanbul": "^0.3.22",
