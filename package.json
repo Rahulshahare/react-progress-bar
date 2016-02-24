@@ -21,7 +21,7 @@
   "dependencies": {
     "babel": "^5.8.23",
     "react": "^0.14.2",
-    "react-bootstrap": "^0.27.0"
+    "react-bootstrap": "^0.28.2"
   },
   "devDependencies": {
     "babelify": "^6.3.0",
