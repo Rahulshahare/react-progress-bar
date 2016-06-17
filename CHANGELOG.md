@@ -1,5 +1,11 @@
 # Change log
 
+### 2.1.0
+- Add a new optional prop for the progress bar's start point before animation.
+- Replace react-shallow-render with enzyme in tests
+- Upgrade other dev dependencies
+- Add nvmrc for node 4.4.4 (project is still compatible with 0.12.9)
+
 ### 2.0.3
 - Re-publish 2.0.1 without missing files
 
@@ -28,4 +34,3 @@
 
 ### 1.0.0
 - Initial release
-
