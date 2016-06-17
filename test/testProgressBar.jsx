@@ -13,6 +13,7 @@ var sinon = require('sinon');
 var ProgressBar = require('../src/ProgressBar');
 
 var defaultProps = {
+  start: 0,
   now: 100,
   duration: 1,
   title: null,
@@ -88,6 +89,19 @@ describe('ProgressBar', function() {
 
     it('should have the correct text', function() {
       assert.equal(wrapper.childAt(1).text(), subtitle);
+    });
+  });
+
+  context('with a start point', function() {
+
+    var wrapper;
+
+    before(function() {
+      wrapper = shallow(<ProgressBar start={50} />);
+    });
+
+    it('should render a progress bar at 50%', function() {
+      assert.equal(wrapper.childAt(1).prop('now'), 50);
     });
   });
 

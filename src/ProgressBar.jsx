@@ -6,6 +6,7 @@ var ReactBootstrap = require('react-bootstrap');
 var ProgressBar = React.createClass({
 
   propTypes: {
+    start: React.PropTypes.number,
     now: React.PropTypes.number,
     duration: React.PropTypes.number,
     title: React.PropTypes.string,
@@ -16,6 +17,7 @@ var ProgressBar = React.createClass({
 
   getDefaultProps: function() {
     return {
+      start: 0,
       now: 100,
       duration: 1,
       title: null,
@@ -26,7 +28,7 @@ var ProgressBar = React.createClass({
 
   getInitialState: function() {
     return {
-      loaded: 0
+      loaded: this.props.start
     };
   },
 
