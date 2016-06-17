@@ -4,7 +4,7 @@
 
 ```
 var ProgressBar = require('react-progress-bar');
-React.render(<ProgressBar />, document.getElementById('container'));
+ReactDOM.render(<ProgressBar />, document.getElementById('container'));
 ```
 
 ## Options

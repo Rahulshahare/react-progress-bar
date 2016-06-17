@@ -26,11 +26,12 @@
   "devDependencies": {
     "babel": "^5.8.23",
     "babelify": "^6.3.0",
-    "browserify": "^11.1.0",
-    "istanbul": "^0.3.22",
-    "make-up": "^5.3.1",
+    "browserify": "^13.0.1",
+    "enzyme": "^2.3.0",
+    "istanbul": "^0.4.3",
+    "make-up": "^9.2.0",
     "mocha": "^2.3.3",
-    "react-shallow-render": "^1.0.1",
+    "react-addons-test-utils": "^0.14.8",
     "react-tests-globals-setup": "^1.0.0",
     "sinon": "^1.17.1",
     "watchify": "^3.4.0"
