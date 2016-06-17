@@ -39,7 +39,7 @@ var ProgressBar = React.createClass({
         if (self.isMounted()) {
           self.setState({ loaded: self.props.now });
         }
-      } catch(e) {
+      } catch (e) {
         // Because our isMounted method throws if DOM has mutated, take advantage here
         // and clear the timeout when we've hit this problem.
         clearTimeout(self._timeoutId);

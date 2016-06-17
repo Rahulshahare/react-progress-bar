@@ -1,10 +1,11 @@
 'use strict';
 
 require('react-tests-globals-setup');
-var React = require('react/addons');
+var React = require('react');
+var ReactDOM = require('react-dom');
 var ReactBootstrap = require('react-bootstrap');
-var shallowRender = require('react-shallow-render');
-var TestUtils = React.addons.TestUtils;
+var shallow = require('enzyme').shallow;
+var TestUtils = require('react-addons-test-utils');
 
 var assert = require('assert');
 var sinon = require('sinon');
@@ -32,39 +33,33 @@ describe('ProgressBar', function() {
 
   context('with no properties', function() {
 
-    var renderOutput;
+    var wrapper;
+
     before(function() {
-      renderOutput = shallowRender(<ProgressBar />);
+      wrapper = shallow(<ProgressBar />);
     });
 
     it('returns a react-bootstrap panel', function() {
-      assert.equal(renderOutput.type, ReactBootstrap.Panel);
+      assert.equal(wrapper.type(), ReactBootstrap.Panel);
     });
 
-    it('should count 4 children', function() {
-      assert.equal(React.Children.count(renderOutput.props.children), 4);
+    it('should count 2 children', function() {
+      assert.equal(wrapper.children().length, 2);
     });
 
     context('1st child', function() {
       it('should be a style tag', function() {
-        assert.equal(renderOutput.props.children[0].type, 'style');
+        assert.equal(wrapper.childAt(0).type(), 'style');
       });
     });
 
-    context('3rd child', function() {
+    context('2nd child', function() {
       it('should be a ReactBootstrap ProgressBar', function() {
-        assert.equal(renderOutput.props.children[2].type, ReactBootstrap.ProgressBar);
+        assert.equal(wrapper.childAt(1).type(), ReactBootstrap.ProgressBar);
       });
 
       it('should have the same bsStyle prop as the parent', function() {
-        assert.equal(renderOutput.props.children[2].props.bsStyle, renderOutput.props.bsStyle);
-      });
-    });
-
-    context('2nd & 4th child', function() {
-      it('should be undefined', function() {
-        assert.equal(renderOutput.props.children[3], undefined);
-        assert.equal(renderOutput.props.children[1], undefined);
+        assert.equal(wrapper.prop('bsStyle'), wrapper.childAt(1).prop('bsStyle'));
       });
     });
 
@@ -73,25 +68,26 @@ describe('ProgressBar', function() {
   context('with a title', function() {
     it('should have the title set on the panel', function() {
       var title = 'This is a title';
-      var renderOutput = shallowRender(<ProgressBar title={title} />);
-      assert.equal(renderOutput.props.header, title);
+      var wrapper = shallow(<ProgressBar title={title} />);
+      assert.equal(wrapper.prop('header'), title);
     });
   });
 
   context('with a subtitle', function() {
 
-    var renderOutput;
+    var wrapper;
     var subtitle = 'This is a subtitle';
+
     before(function() {
-      renderOutput = shallowRender(<ProgressBar subtitle={subtitle} />);
+      wrapper = shallow(<ProgressBar subtitle={subtitle} />);
     });
 
     it('should have a 2nd child that is a paragraph', function() {
-      assert.equal(renderOutput.props.children[1].type, 'p');
+      assert.equal(wrapper.childAt(1).type(), 'p');
     });
 
     it('should have the correct text', function() {
-      assert.equal(renderOutput.props.children[1].props.children, subtitle);
+      assert.equal(wrapper.childAt(1).text(), subtitle);
     });
   });
 
@@ -99,6 +95,7 @@ describe('ProgressBar', function() {
 
     var testParent, element, clock;
     var now = 75;
+
     beforeEach(function() {
       clock = sinon.useFakeTimers();
       testParent = React.createFactory(React.createClass({
@@ -147,7 +144,7 @@ describe('ProgressBar', function() {
 
     it('should call clearTimeout() when unmounted', function() {
       var spy = sinon.spy(clock, 'clearTimeout');
-      React.unmountComponentAtNode(React.findDOMNode(element.refs.sot).parentNode);
+      ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(element.refs.sot).parentNode);
       assert(spy.calledOnce);
     });
 
@@ -198,9 +195,6 @@ describe('ProgressBar', function() {
         });
 
       });
-
     });
-
   });
-
 });

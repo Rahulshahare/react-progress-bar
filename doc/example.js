@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var ProgressBar = require('../src/ProgressBar.jsx');
 
 var Example = React.createClass({
@@ -55,4 +56,4 @@ var Example = React.createClass({
   }
 });
 
-React.render(<Example />, document.getElementById('container'));
+ReactDOM.render(<Example />, document.getElementById('container'));
