@@ -1,5 +1,12 @@
 # Change log
 
+### 2.0.3
+- Re-publish 2.0.1 without missing files
+
+### 2.0.1
+- Bump react-bootstrap
+- Publish to npm
+
 ### 2.0.0
 - Updated react version.
 
