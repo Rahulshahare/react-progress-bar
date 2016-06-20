@@ -9,7 +9,8 @@ ReactDOM.render(<ProgressBar />, document.getElementById('container'));
 
 ## Options
 
-- __now__ - The currently loaded percentage you want to diplay. Default: 100.
+- __start__ - The starting point for the transition to the loaded percentage. Default: 0.
+- __now__ - The currently loaded percentage you want to display. Default: 100.
 - __duration__ The duration of the transition to the loaded percentage. - Default: 1.
 - __title__ A title on the loading panel. - Default: null.
 - __subtitle__ A subtitle on the loading panel. - Default: null.

@@ -33,6 +33,9 @@ var Example = React.createClass({
         <h3>Transitions to 100% loaded over 30 seconds</h3>
         <ProgressBar duration={30} />
 
+        <h3>With a start point of 50</h3>
+        <ProgressBar start={50} now={70} duration={20} />
+
         <h2>With an external control</h2>
         <h3>Updates based on a percent (as integer) you pass in</h3>
         <p>default transition</p>
