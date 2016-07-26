@@ -1,5 +1,8 @@
 # Change log
 
+### 2.1.1
+- Require only the parts that are needed from react-bootstrap.
+
 ### 2.1.0
 - Add a new optional prop for the progress bar's start point before animation.
 - Replace react-shallow-render with enzyme in tests
