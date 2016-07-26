@@ -1,7 +1,10 @@
 'use strict';
 
 var React = require('react');
-var ReactBootstrap = require('react-bootstrap');
+var ReactBootstrap = {
+  Panel: require('react-bootstrap/lib/Panel'),
+  ProgressBar: require('react-bootstrap/lib/ProgressBar')
+};
 
 var ProgressBar = React.createClass({
 
