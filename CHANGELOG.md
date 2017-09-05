@@ -1,6 +1,9 @@
 # Change log
 
 ### 2.1.1
+- Update react-bootstrap to 0.31.2
+
+### 2.1.1
 - Require only the parts that are needed from react-bootstrap.
 
 ### 2.1.0
