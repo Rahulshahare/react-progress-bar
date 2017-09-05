@@ -21,7 +21,7 @@
   "dependencies": {
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
-    "react-bootstrap": "^0.28.2"
+    "react-bootstrap": "^0.31.2"
   },
   "devDependencies": {
     "babel": "^5.8.23",
