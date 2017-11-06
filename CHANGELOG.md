@@ -1,5 +1,14 @@
 # Change log
 
+### 3.0.0
+- Make react, react-bootstrap peer dependencies
+- Fix duration animation
+- Update build system to use latest babel, browserify
+- Use Enzyme v3
+- Use Node 6 for local development
+- Use react 15 for local development (but still support 0.14 as a peer dependency)
+- Remove make-up and use standardjs for linting
+
 ### 2.1.1
 - Update react-bootstrap to 0.31.2
 
