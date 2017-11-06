@@ -24,17 +24,17 @@
     "react-bootstrap": "^0.31.2"
   },
   "devDependencies": {
-    "babel": "^5.8.23",
-    "babelify": "^6.3.0",
+    "babel": "^5.8.38",
+    "babelify": "^6.4.0",
     "browserify": "^13.0.1",
-    "enzyme": "^2.3.0",
+    "enzyme": "^2.9.1",
     "eslint": "^4.10.0",
     "eslint-plugin-react": "^7.4.0",
     "istanbul": "^0.4.3",
-    "mocha": "^2.3.3",
+    "mocha": "^4.0.1",
     "react-addons-test-utils": "^0.14.8",
     "react-tests-globals-setup": "^1.0.0",
-    "sinon": "^1.17.1",
+    "sinon": "^4.1.1",
     "standard": "^10.0.3",
     "watchify": "^3.4.0"
   },
