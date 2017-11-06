@@ -5,86 +5,75 @@ const ReactBootstrap = {
   Panel: require('react-bootstrap/lib/Panel'),
   ProgressBar: require('react-bootstrap/lib/ProgressBar')
 }
-const bootstrapUtils = require('react-bootstrap/lib/utils/bootstrapUtils')
+const { number, string, oneOf, node } = require('prop-types')
 
-const ProgressBar = React.createClass({
-
-  propTypes: {
-    start: React.PropTypes.number,
-    now: React.PropTypes.number,
-    duration: React.PropTypes.number,
-    title: React.PropTypes.string,
-    subtitle: React.PropTypes.string,
-    type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger']),
-    children: React.PropTypes.node
-  },
-
-  getDefaultProps: function () {
-    return {
-      start: 0,
-      now: 100,
-      duration: 1,
-      title: null,
-      subtitle: null,
-      type: 'success'
+class ProgressBar extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      loaded: props.start
     }
-  },
+  }
 
-  getInitialState: function () {
-    return {
-      loaded: this.props.start
-    }
-  },
+  componentDidMount () {
+    this._isMounted = true
+    this._timeoutId = setTimeout(() => this._isMounted && this.setState({ loaded: this.props.now }), 500)
+  }
 
-  componentDidMount: function () {
-    const self = this
-    this._timeoutId = setTimeout(function () {
-      try {
-        // We can only setState if we want our component to re-render
-        // and we only want to re-render if we have a DOM Node to render into.
-        if (self.isMounted()) {
-          self.setState({ loaded: self.props.now })
-        }
-      } catch (e) {
-        // Because our isMounted method throws if DOM has mutated, take advantage here
-        // and clear the timeout when we've hit this problem.
-        clearTimeout(self._timeoutId)
-      }
-    }, 500)
-  },
-
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     clearTimeout(this._timeoutId)
-  },
+    this._isMounted = false
+  }
 
-  componentWillReceiveProps: function (nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.now !== this.props.now) {
       this.setState({ loaded: nextProps.now })
     }
-  },
+  }
 
-  render: function () {
-    const timing = this.props.duration + 's'
-    const subtitle = this.props.subtitle ? <p>{this.props.subtitle}</p> : undefined
+  render () {
+    const { duration, subtitle, type, title, children } = this.props
+    const { loaded } = this.state
 
     // TODO: We need a better way of handling the CSS transitions here.
+    const timing = duration + 's'
     const uniqueClass = 'progressBar' + timing
-    const style = '.' + uniqueClass + ' {transition-duration: ' + timing + '; }'
-
-    // TODO: this is unsupported: https://github.com/react-bootstrap/react-bootstrap/issues/2725
-    const bsStyle = this.props.type + ' ' + uniqueClass
-
-    bootstrapUtils.addStyle(ReactBootstrap.ProgressBar, uniqueClass)
+    const style = '.' + uniqueClass + ' .progress-bar {transition-duration: ' + timing + ';}'
 
     return (
-      <ReactBootstrap.Panel header={this.props.title} bsStyle={this.props.type}>
+      <ReactBootstrap.Panel header={title} bsStyle={type}>
         <style>{style}</style>
-        {subtitle}
-        <ReactBootstrap.ProgressBar active striped bsStyle={bsStyle} now={this.state.loaded} />
-        {this.props.children}
+        {subtitle && <p>{subtitle}</p>}
+        <ReactBootstrap.ProgressBar
+          active
+          striped
+          className={uniqueClass}
+          bsStyle={type}
+          now={loaded}
+        />
+        {children}
       </ReactBootstrap.Panel>
     )
   }
-})
+}
+
+ProgressBar.propTypes = {
+  start: number,
+  now: number,
+  duration: number,
+  title: string,
+  subtitle: string,
+  type: oneOf(['success', 'info', 'warning', 'danger']),
+  children: node
+}
+
+ProgressBar.defaultProps = {
+  start: 0,
+  now: 100,
+  duration: 1,
+  title: null,
+  subtitle: null,
+  type: 'success'
+}
 
 module.exports = ProgressBar

@@ -2,10 +2,8 @@
 
 require('react-tests-globals-setup')
 const React = require('react')
-const ReactDOM = require('react-dom')
-const ReactBootstrap = require('react-bootstrap')
-const shallow = require('enzyme').shallow
-const TestUtils = require('react-dom/test-utils')
+const { ProgressBar: ReactProgressBar, Panel } = require('react-bootstrap')
+const { shallow, mount } = require('enzyme')
 
 const assert = require('assert')
 const sinon = require('sinon')
@@ -18,17 +16,13 @@ const defaultProps = {
   duration: 1,
   title: null,
   subtitle: null,
-  type: 'info'
+  type: 'success'
 }
 
 describe('ProgressBar', function () {
-  it('is an element', function () {
-    assert(TestUtils.isElement(<ProgressBar />))
-  })
-
   it('has default values for many props', function () {
-    var element = <ProgressBar />
-    assert.deepEqual(element.props, defaultProps)
+    const wrapper = shallow(<ProgressBar />)
+    assert.deepEqual(wrapper.instance().props, defaultProps)
   })
 
   context('with no properties', function () {
@@ -39,7 +33,7 @@ describe('ProgressBar', function () {
     })
 
     it('returns a react-bootstrap panel', function () {
-      assert.equal(wrapper.type(), ReactBootstrap.Panel)
+      assert.equal(wrapper.type(), Panel)
     })
 
     it('should count 2 children', function () {
@@ -54,7 +48,7 @@ describe('ProgressBar', function () {
 
     context('2nd child', function () {
       it('should be a ReactBootstrap ProgressBar', function () {
-        assert.equal(wrapper.childAt(1).type(), ReactBootstrap.ProgressBar)
+        assert.equal(wrapper.childAt(1).type(), ReactProgressBar)
       })
 
       it('should have the same bsStyle prop as the parent', function () {
@@ -101,105 +95,55 @@ describe('ProgressBar', function () {
   })
 
   context('render into document', function () {
-    let testParent, element, clock
-    const now = 75
+    let wrapper, clock
 
     beforeEach(function () {
       clock = sinon.useFakeTimers()
-      testParent = React.createFactory(React.createClass({
-        getInitialState: function () {
-          return { testState: now }
-        },
-        render: function () {
-          return <ProgressBar ref='sot' now={this.state.testState} />
+      class Container extends React.Component {
+        constructor (props) {
+          super(props)
+          this.state = { testState: props.now }
         }
-      }))
 
-      element = TestUtils.renderIntoDocument(testParent())
+        render () {
+          return <ProgressBar start={10} now={this.state.testState} />
+        }
+      }
+      wrapper = mount(<Container now={75} />)
     })
 
     afterEach(function () {
       clock.restore()
     })
 
-    it('should be an instance of ProgressBar', function () {
-      assert(TestUtils.isCompositeComponentWithType(element.refs.sot, ProgressBar))
+    it('should start at 10', function () {
+      assert.equal(wrapper.find(ReactProgressBar).at(0).prop('now'), 10)
     })
 
     it('should move the bar ahead', function () {
       clock.tick(500)
-      var progressBars = TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar)
-      assert.equal(progressBars[0].props.now, now)
+      wrapper.update()
+      assert.equal(wrapper.find(ReactProgressBar).at(0).prop('now'), 75)
     })
 
     it('should not move the bar ahead if prop passed in is the same as current prop', function () {
-      element.setState({
-        testState: now
-      })
+      wrapper.setState({ testState: 75 })
       clock.tick(500)
-      var progressBars = TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar)
-      assert.equal(progressBars[0].props.now, now)
+      wrapper.update()
+      assert.equal(wrapper.find(ReactProgressBar).at(0).prop('now'), 75)
     })
 
     it('should move the bar ahead to 100 if prop changed', function () {
-      element.setState({
-        testState: 100
-      })
+      wrapper.setState({ testState: 100 })
       clock.tick(500)
-      var progressBars = TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar)
-      assert.equal(progressBars[0].props.now, 100)
+      wrapper.update()
+      assert.equal(wrapper.find(ReactProgressBar).at(0).prop('now'), 100)
     })
 
     it('should call clearTimeout() when unmounted', function () {
-      var spy = sinon.spy(clock, 'clearTimeout')
-      ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(element.refs.sot).parentNode)
+      const spy = sinon.spy(clock, 'clearTimeout')
+      wrapper.unmount()
       assert(spy.calledOnce)
-    })
-
-    context('componentDidMount', function () {
-      var isMounted
-      beforeEach(function () {
-        isMounted = sinon.stub(ProgressBar.prototype, 'isMounted')
-      })
-
-      afterEach(function () {
-        isMounted.restore()
-      })
-
-      context('DOM Mutated', function () {
-        context('isMounted() throws', function () {
-          it('should call clearTimeout()', function () {
-            isMounted.throws()
-            var clearTimeOutSpy = sinon.spy(clock, 'clearTimeout')
-            clock.tick(500)
-            TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar)
-            assert(clearTimeOutSpy.calledOnce)
-            clearTimeOutSpy.restore()
-          })
-        })
-
-        context('isMounted() returns false', function () {
-          it('should only call setState() after timeout if DOM is mounted', function () {
-            isMounted.returns(false)
-            var setStateSpy = sinon.spy(ProgressBar.prototype, 'setState')
-            clock.tick(500)
-            TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar)
-            sinon.assert.notCalled(setStateSpy)
-            setStateSpy.restore()
-          })
-        })
-
-        context('isMounted() returns true', function () {
-          it('should call setState() if DOM doesnt mutate', function () {
-            isMounted.returns(true)
-            var setStateSpy = sinon.spy(ProgressBar.prototype, 'setState')
-            clock.tick(500)
-            TestUtils.scryRenderedComponentsWithType(element.refs.sot, ReactBootstrap.ProgressBar)
-            assert(setStateSpy.calledOnce)
-            setStateSpy.restore()
-          })
-        })
-      })
     })
   })
 })
