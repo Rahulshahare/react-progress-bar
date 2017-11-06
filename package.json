@@ -9,7 +9,7 @@
     "prestart": "ulimit -n 9999",
     "start": "watchify -t babelify doc/example.js -o doc/example-built.js -v",
     "test": "mocha --compilers js:babel/register test/test*",
-    "lint": "make-up src test doc",
+    "lint": "standard",
     "coverage": "istanbul cover _mocha -- --compilers js:babel/register test/test* && istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100"
   },
   "author": "Rob Huzzey <robert.huzzey@holidayextras.com>",
@@ -28,12 +28,26 @@
     "babelify": "^6.3.0",
     "browserify": "^13.0.1",
     "enzyme": "^2.3.0",
+    "eslint": "^4.10.0",
+    "eslint-plugin-react": "^7.4.0",
     "istanbul": "^0.4.3",
-    "make-up": "^9.2.0",
     "mocha": "^2.3.3",
     "react-addons-test-utils": "^0.14.8",
     "react-tests-globals-setup": "^1.0.0",
     "sinon": "^1.17.1",
+    "standard": "^10.0.3",
     "watchify": "^3.4.0"
+  },
+  "standard": {
+    "globals": [
+      "expect",
+      "it",
+      "describe",
+      "context",
+      "beforeEach",
+      "afterEach",
+      "before",
+      "after"
+    ]
   }
 }

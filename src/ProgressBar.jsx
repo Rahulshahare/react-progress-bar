@@ -1,12 +1,12 @@
-'use strict';
+'use strict'
 
-var React = require('react');
-var ReactBootstrap = {
+const React = require('react')
+const ReactBootstrap = {
   Panel: require('react-bootstrap/lib/Panel'),
   ProgressBar: require('react-bootstrap/lib/ProgressBar')
-};
+}
 
-var ProgressBar = React.createClass({
+const ProgressBar = React.createClass({
 
   propTypes: {
     start: React.PropTypes.number,
@@ -18,7 +18,7 @@ var ProgressBar = React.createClass({
     children: React.PropTypes.node
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       start: 0,
       now: 100,
@@ -26,49 +26,49 @@ var ProgressBar = React.createClass({
       title: null,
       subtitle: null,
       type: 'info'
-    };
+    }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       loaded: this.props.start
-    };
+    }
   },
 
-  componentDidMount: function() {
-    var self = this;
-    this._timeoutId = setTimeout(function() {
+  componentDidMount: function () {
+    const self = this
+    this._timeoutId = setTimeout(function () {
       try {
         // We can only setState if we want our component to re-render
         // and we only want to re-render if we have a DOM Node to render into.
         if (self.isMounted()) {
-          self.setState({ loaded: self.props.now });
+          self.setState({ loaded: self.props.now })
         }
       } catch (e) {
         // Because our isMounted method throws if DOM has mutated, take advantage here
         // and clear the timeout when we've hit this problem.
-        clearTimeout(self._timeoutId);
+        clearTimeout(self._timeoutId)
       }
-    }, 500);
+    }, 500)
   },
 
-  componentWillUnmount: function() {
-    clearTimeout(this._timeoutId);
+  componentWillUnmount: function () {
+    clearTimeout(this._timeoutId)
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function (nextProps) {
     if (nextProps.now !== this.props.now) {
-      this.setState({ loaded: nextProps.now });
+      this.setState({ loaded: nextProps.now })
     }
   },
 
-  render: function() {
-    var timing = this.props.duration + 's';
-    var subtitle = this.props.subtitle ? <p>{this.props.subtitle}</p> : undefined;
+  render: function () {
+    const timing = this.props.duration + 's'
+    const subtitle = this.props.subtitle ? <p>{this.props.subtitle}</p> : undefined
 
     // TODO: We need a better way of handling the CSS transitions here.
-    var uniqueClass = 'progressBar' + timing;
-    var style = '.' + uniqueClass + ' {transition-duration: ' + timing + '; }';
+    const uniqueClass = 'progressBar' + timing
+    const style = '.' + uniqueClass + ' {transition-duration: ' + timing + '; }'
 
     return (
       <ReactBootstrap.Panel header={this.props.title} bsStyle={this.props.type}>
@@ -77,8 +77,8 @@ var ProgressBar = React.createClass({
         <ReactBootstrap.ProgressBar className={uniqueClass} active striped bsStyle={this.props.type} now={this.state.loaded} />
         {this.props.children}
       </ReactBootstrap.Panel>
-    );
+    )
   }
-});
+})
 
-module.exports = ProgressBar;
+module.exports = ProgressBar

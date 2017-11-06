@@ -1,25 +1,25 @@
-'use strict';
+'use strict'
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ProgressBar = require('../src/ProgressBar.jsx');
+var React = require('react')
+var ReactDOM = require('react-dom')
+var ProgressBar = require('../src/ProgressBar.jsx')
 
 var Example = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       loadedTime: 0
-    };
+    }
   },
 
-  updateTime: function() {
-    this.setState({ loadedTime: this.state.loadedTime + 10 });
+  updateTime: function () {
+    this.setState({ loadedTime: this.state.loadedTime + 10 })
   },
 
-  render: function() {
+  render: function () {
     return (
-      <div className="container">
-        <div className="jumbotron">
+      <div className='container'>
+        <div className='jumbotron'>
           <h1>Progress Bar</h1>
         </div>
 
@@ -43,20 +43,20 @@ var Example = React.createClass({
 
         <p>5 second transition</p>
         <ProgressBar now={this.state.loadedTime} duration={5} />
-        <button className="btn btn-default" onClick={this.updateTime}>Load 10% more</button>
+        <button className='btn btn-default' onClick={this.updateTime}>Load 10% more</button>
 
         <h2>With a title</h2>
-        <ProgressBar title="This is a title" />
+        <ProgressBar title='This is a title' />
 
         <h2>With a subtitle</h2>
-        <ProgressBar subtitle="This is a subtitle" />
+        <ProgressBar subtitle='This is a subtitle' />
 
         <h2>With a child</h2>
         <ProgressBar><p>This is a child</p></ProgressBar>
 
       </div>
-    );
+    )
   }
-});
+})
 
-ReactDOM.render(<Example />, document.getElementById('container'));
+ReactDOM.render(<Example />, document.getElementById('container'))
