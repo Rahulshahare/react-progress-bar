@@ -5,7 +5,7 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const ReactBootstrap = require('react-bootstrap')
 const shallow = require('enzyme').shallow
-const TestUtils = require('react-addons-test-utils')
+const TestUtils = require('react-dom/test-utils')
 
 const assert = require('assert')
 const sinon = require('sinon')
