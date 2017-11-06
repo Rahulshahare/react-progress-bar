@@ -1,5 +1,9 @@
 # Change log
 
+### 4.0.0
+
+- Support react 16
+
 ### 3.0.0
 - Make react, react-bootstrap peer dependencies
 - Fix duration animation
