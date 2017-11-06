@@ -5,6 +5,7 @@ const ReactBootstrap = {
   Panel: require('react-bootstrap/lib/Panel'),
   ProgressBar: require('react-bootstrap/lib/ProgressBar')
 }
+const bootstrapUtils = require('react-bootstrap/lib/utils/bootstrapUtils')
 
 const ProgressBar = React.createClass({
 
@@ -25,7 +26,7 @@ const ProgressBar = React.createClass({
       duration: 1,
       title: null,
       subtitle: null,
-      type: 'info'
+      type: 'success'
     }
   },
 
@@ -70,11 +71,16 @@ const ProgressBar = React.createClass({
     const uniqueClass = 'progressBar' + timing
     const style = '.' + uniqueClass + ' {transition-duration: ' + timing + '; }'
 
+    // TODO: this is unsupported: https://github.com/react-bootstrap/react-bootstrap/issues/2725
+    const bsStyle = this.props.type + ' ' + uniqueClass
+
+    bootstrapUtils.addStyle(ReactBootstrap.ProgressBar, uniqueClass)
+
     return (
       <ReactBootstrap.Panel header={this.props.title} bsStyle={this.props.type}>
         <style>{style}</style>
         {subtitle}
-        <ReactBootstrap.ProgressBar className={uniqueClass} active striped bsStyle={this.props.type} now={this.state.loaded} />
+        <ReactBootstrap.ProgressBar active striped bsStyle={bsStyle} now={this.state.loaded} />
         {this.props.children}
       </ReactBootstrap.Panel>
     )
