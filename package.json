@@ -8,9 +8,9 @@
     "build": "mkdir -p dist && babel src/ProgressBar.jsx -o dist/ProgressBar.js",
     "prestart": "ulimit -n 9999",
     "start": "watchify -t babelify doc/example.js -o doc/example-built.js -v",
-    "test": "mocha --compilers js:babel/register test/test*",
+    "test": "mocha --compilers js:babel-register test/test*",
     "lint": "standard",
-    "coverage": "istanbul cover _mocha -- --compilers js:babel/register test/test* && istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100"
+    "coverage": "istanbul cover _mocha -- --compilers js:babel-register test/test* && istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100"
   },
   "author": "Rob Huzzey <robert.huzzey@holidayextras.com>",
   "license": "ISC",
@@ -24,9 +24,12 @@
     "react-bootstrap": "^0.31.2"
   },
   "devDependencies": {
-    "babel": "^5.8.38",
-    "babelify": "^6.4.0",
-    "browserify": "^13.0.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "babelify": "^8.0.0",
     "enzyme": "^2.9.1",
     "eslint": "^4.10.0",
     "eslint-plugin-react": "^7.4.0",
@@ -36,7 +39,7 @@
     "react-tests-globals-setup": "^1.0.0",
     "sinon": "^4.1.1",
     "standard": "^10.0.3",
-    "watchify": "^3.4.0"
+    "watchify": "^3.9.0"
   },
   "standard": {
     "globals": [
