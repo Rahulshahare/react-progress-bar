@@ -1,6 +1,6 @@
 {
   "name": "@holidayextras/react-progress-bar",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Component to generate a simple loading bar (wrapped in a panel)",
   "main": "dist/ProgressBar.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "mkdir -p dist && babel src/ProgressBar.jsx -o dist/ProgressBar.js",
     "prestart": "ulimit -n 9999",
     "start": "watchify -t babelify doc/example.js -o doc/example-built.js -v",
-    "test": "mocha --compilers js:babel-register -r test/setup test/test*",
+    "test": "mocha --require babel-register -r test/setup test/test*",
     "lint": "standard",
     "coverage": "istanbul cover _mocha -- --compilers js:babel-register test/test* && istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100"
   },
@@ -19,9 +19,10 @@
     "url": "https://github.com/holidayextras/react-progress-bar.git"
   },
   "peerDependencies": {
-    "react": "^0.14.2 || ^15.6.1",
-    "react-dom": "^0.14.2 || ^15.6.1",
-    "react-bootstrap": "^0.31.2"
+    "react": "^0.14.2 || >15.6.1",
+    "react-dom": "^0.14.2 || >15.6.1",
+    "react-bootstrap": "^0.31.2",
+    "prop-types": "^15.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -31,14 +32,15 @@
     "babel-register": "^6.26.0",
     "babelify": "^8.0.0",
     "enzyme": "^3.1.1",
-    "enzyme-adapter-react-15": "^1.0.5",
+    "enzyme-adapter-react-16": "^1.0.4",
     "eslint": "^4.10.0",
     "eslint-plugin-react": "^7.4.0",
     "istanbul": "^0.4.3",
     "mocha": "^4.0.1",
-    "react": "^15.6.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
     "react-bootstrap": "^0.31.2",
-    "react-dom": "^15.6.1",
+    "react-dom": "^16.0.0",
     "react-test-renderer": "^15.6.2",
     "react-tests-globals-setup": "^1.0.0",
     "sinon": "^4.1.1",

@@ -4,19 +4,20 @@ var React = require('react')
 var ReactDOM = require('react-dom')
 var ProgressBar = require('../src/ProgressBar.jsx')
 
-var Example = React.createClass({
-
-  getInitialState: function () {
-    return {
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
       loadedTime: 0
     }
-  },
+    this.updateTime = this.updateTime.bind(this)
+  }
 
-  updateTime: function () {
+  updateTime () {
     this.setState({ loadedTime: this.state.loadedTime + 10 })
-  },
+  }
 
-  render: function () {
+  render () {
     return (
       <div className='container'>
         <div className='jumbotron'>
@@ -57,6 +58,6 @@ var Example = React.createClass({
       </div>
     )
   }
-})
+}
 
 ReactDOM.render(<Example />, document.getElementById('container'))
